@@ -29,7 +29,7 @@ export default class Login extends Component {
             
                 <input type = "text" placeholder= "User Name" onKeyUp = {this.onDoneName} />
                 <input type = "password" placeholder="password" onKeyUp ={this.onDonePass} />
-                <button  onClick = {() => this.checkLogin( name)}>Login </button>
+                <button  onClick = {() => this.checkLogin(name)}>Login </button>
             </div>
         )
     }
