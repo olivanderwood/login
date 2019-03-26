@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Login.css';
 import { Form,FormGroup, Label, Input, Button,Container, Col } from 'reactstrap';
+// import PropTypes from 'prop-types';
+
 
 
 export default class Login extends Component {
@@ -34,7 +36,7 @@ export default class Login extends Component {
                             <FormGroup>
 
                                 <Label>User Name: </Label>
-                                <Input type = "text" placeholder= "User Name" onKeyUp = {this.onDoneName} />
+                                <Input type = "text" placeholder= "User Name" onKeyUp = {this.onDoneName} autoFocus/>
 
                             </FormGroup>
 
@@ -101,19 +103,31 @@ export default class Login extends Component {
                 if(this.state.userName === name[i].loginName && this.state.userPass === name[i].passWord  ){
                     
                     alert("success")
+                    this.setState({
+                        userName: "",
+                        userPass: "",
+                    })
                     break;
                 }
             
                 else if(this.state.userName !== name[i].loginName && i === (name.length - 1)){
                     alert("faild")
+                    this.setState({
+                        userName: "",
+                        userPass: "",
+                    })
                 }
 
 
                 else if(this.state.userName === name[i].loginName && this.state.userPass !== name[i].passWord && i ===(name.length -1) ){
                     alert ("faild")
+                    this.setState({
+                        userName: "",
+                        userPass: "",
+                    })
                 }
             }
         }    
     }
-    
-    }
+
+}

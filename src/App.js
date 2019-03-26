@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Login from './components/Login';
+
+
+
+
 
 class App extends Component {
   constructor(){
@@ -14,16 +18,20 @@ class App extends Component {
       ]
     }
   }
+  
 
 
   render() {
     const {userList} = this.state;
-
-
+    const Index = () =>  <Login name = {userList} />
     return (
-      <div className="App">
-        <Login name = {userList} />
-      </div>
+     
+      <Router>
+        <div className="App">
+          <Route path="/" exact component = {Index}/>
+        </div>
+      </Router>
+        
     );
   }
 }
