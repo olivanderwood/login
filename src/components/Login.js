@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Login.css';
-
+import { Form,FormGroup, Label, Input, Button,Container, Col } from 'reactstrap';
 
 
 export default class Login extends Component {
@@ -25,12 +25,36 @@ export default class Login extends Component {
 
        
         return(
-            <div className = "Login">
+             <Container>
+                <Col sm={{offset:4 }}>
+                    <Form>
+
+                        <div className = "Login">
+
+                            <FormGroup>
+
+                                <Label>User Name: </Label>
+                                <Input type = "text" placeholder= "User Name" onKeyUp = {this.onDoneName} />
+
+                            </FormGroup>
+
+                            <FormGroup>
+
+                                <Label>Password: </Label>
+                                <Input type = "password" placeholder="Password" onKeyUp ={this.onDonePass} />
+
+                            </FormGroup>
+
+                            <Button outline color="success" size="lg" block  onClick = {() => this.checkLogin(name)}>Login </Button>
+                        </div>
+                   
+                    </Form>
+                </Col>    
+             </Container>
+                
+
             
-                <input type = "text" placeholder= "User Name" onKeyUp = {this.onDoneName} />
-                <input type = "password" placeholder="password" onKeyUp ={this.onDonePass} />
-                <button  onClick = {() => this.checkLogin(name)}>Login </button>
-            </div>
+            
         )
     }
    
