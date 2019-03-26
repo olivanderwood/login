@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './Login.css';
-import { Form,FormGroup, Label, Input, Button,Container, Col } from 'reactstrap';
+import { Form,FormGroup, Label, Input, Button,Container, Col, Fade } from 'reactstrap';
 // import PropTypes from 'prop-types';
-
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 export default class Login extends Component {
@@ -10,7 +10,8 @@ export default class Login extends Component {
         super(state);
         this.state = {
                 userName:"", 
-                userPass:"",            
+                userPass:"",
+                isFade: true,          
         }
 
 
@@ -23,42 +24,63 @@ export default class Login extends Component {
     
 
     render () {
-        const {name} = this.props;
+        
+        const {name, link} = this.props;
 
        
         return(
-             <Container>
-                <Col sm={{offset:4 }}>
-                    <Form>
+            
+            <Router>
 
-                        <div className = "Login">
+                <Fade in = {this.state.isFade}>
+                    <Container>
+                        <Col sm={{offset:4 }}>
+                            <Form>
 
-                            <FormGroup>
+                                <div className = "Login">
 
-                                <Label>User Name: </Label>
-                                <Input type = "text" placeholder= "User Name" onKeyUp = {this.onDoneName} autoFocus/>
+                                    <FormGroup>
 
-                            </FormGroup>
+                                        <Label>User Name: </Label>
+                                        <Input type = "text" placeholder= "User Name" onKeyUp = {this.onDoneName} autoFocus/>
 
-                            <FormGroup>
+                                    </FormGroup>
 
-                                <Label>Password: </Label>
-                                <Input type = "password" placeholder="Password" onKeyUp ={this.onDonePass} />
+                                    <FormGroup>
 
-                            </FormGroup>
+                                        <Label>Password: </Label>
+                                        <Input type = "password" placeholder="Password" onKeyUp ={this.onDonePass} />
 
-                            <Button outline color="success" size="lg" block  onClick = {() => this.checkLogin(name)}>Login </Button>
-                        </div>
-                   
-                    </Form>
-                </Col>    
-             </Container>
+                                    </FormGroup>
+                                    
+                                    <Link to ="/Register" onClick={this.toggle}>Create new account</Link>
+
+                                    <Button outline color="success" size="lg" block  onClick = {() => this.checkLogin(name)}>Login </Button>
+                                </div>
+                        
+                            </Form>
+                        </Col>    
+                    </Container>
+                </Fade>
                 
 
+                <Route path="/Register" exact component = {link}/>
+            </Router>
             
             
         )
     }
+   
+
+    toggle(){
+        debugger;
+        this.setState({
+            ...this.state.userName,
+            ...this.state.userPass,
+            isFade: !this.state.isFade
+        })
+    }
+
    
     onDoneName(event){
         
@@ -67,7 +89,8 @@ export default class Login extends Component {
         text =text.trim();
         this.setState({
             userName:text, 
-            ...this.state.userPass, 
+            ...this.state.userPass,
+            ...this.state.isFade, 
         })
         
     }
@@ -79,8 +102,9 @@ export default class Login extends Component {
         pass = event.target.value;
         pass =pass.trim();
         this.setState({
-            ...this.state.userPass, 
+            ...this.state.userName, 
             userPass:pass, 
+            ...this.state.isFade,
             
         })
         
@@ -106,6 +130,7 @@ export default class Login extends Component {
                     this.setState({
                         userName: "",
                         userPass: "",
+                        ...this.state.isFade
                     })
                     break;
                 }
@@ -115,6 +140,7 @@ export default class Login extends Component {
                     this.setState({
                         userName: "",
                         userPass: "",
+                        ...this.state.isFade
                     })
                 }
 
@@ -128,6 +154,15 @@ export default class Login extends Component {
                 }
             }
         }    
+    }
+
+
+    componentDidMount(){
+        this.setState({
+            ...this.state.userName,
+            ...this.state.userPass,
+            isFade: true,
+        })
     }
 
 }
